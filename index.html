@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#09090d">
+
+<title>NEGSTORE — Подписки на ИИ</title>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<style>
+
+*{box-sizing:border-box}
+
+body{margin:0;background:#09090d;color:#fff;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif}
+
+main{max-width:600px;margin:auto;padding:24px 18px 40px}
+
+header{display:flex;align-items:center;gap:12px;margin-bottom:35px}
+
+.logo{background:linear-gradient(135deg,#c084fc,#7e22ce);width:48px;height:48px;border-radius:15px;display:grid;place-items:center;font-size:28px;font-weight:900}
+
+.brand{font-size:22px;font-weight:850;letter-spacing:1px}
+
+.sub{color:#a1a1aa;font-size:11px;margin-top:4px;letter-spacing:1px}
+
+.hero{padding:25px 20px;border:1px solid #402454;border-radius:24px;background:radial-gradient(ellipse at top right,#46206c 0%,#17101f 48%,#111116 100%);margin-bottom:30px}
+
+.tag{color:#d8b4fe;font-size:11px;letter-spacing:2px;font-weight:bold}
+
+h1{font-size:32px;line-height:1.15;margin:15px 0}
+
+p{color:#b6b3c1;line-height:1.55;font-size:14px}
+
+h2{font-size:21px;margin:0 0 16px}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+.card{padding:17px 14px;background:#141419;border:1px solid #29242f;border-radius:19px}
+
+.symbol{width:43px;height:43px;border-radius:13px;background:#282035;display:grid;place-items:center;font-size:21px;margin-bottom:17px}
+
+.card h3{font-size:17px;margin:0 0 7px}
+
+.card p{min-height:22px;margin:8px 0}
+
+.price{font-size:21px;font-weight:800;margin:13px 0 3px}
+
+.month{font-size:12px;color:#96919f;margin-bottom:16px}
+
+button{width:100%;padding:12px;border:0;border-radius:12px;background:linear-gradient(135deg,#a855f7,#7e22ce);color:white;font-size:14px;font-weight:750;cursor:pointer}
+
+button:active{opacity:.8}
+
+.support{margin-top:25px;padding:20px;border:1px solid #302339;border-radius:20px;background:#121015}
+
+.support button{margin-top:10px;background:#25202c}
+
+footer{text-align:center;color:#77717f;font-size:12px;margin-top:26px}
+
+@media(max-width:350px){.grid{grid-template-columns:1fr}h1{font-size:28px}}
+
+</style>
+
+</head>
+
+<body>
+
+<main>
+
+<header>
+
+<div class="logo">N</div>
+
+<div>
+
+<div class="brand">NEGSTORE</div>
+
+<div class="sub">AI SUBSCRIPTIONS STORE</div>
+
+</div>
+
+</header>
+
+<section class="hero">
+
+<div class="tag">WELCOME TO NEGSTORE</div>
+
+<h1>Твой доступ<br>к миру ИИ.</h1>
+
+<p>Выбирай свою нейросеть. Новые возможности для учёбы, работы и творчества — в одном месте.</p>
+
+</section>
+
+<h2>Подписки</h2>
+
+<div class="grid">
+
+<article class="card">
+
+<div class="symbol">✳</div>
+
+<h3>Grok</h3>
+
+<p>ИИ от xAI</p>
+
+<div class="price">1 500 ₽</div>
+
+<div class="month">за 1 месяц</div>
+
+<button onclick="order('Grok','1500')">Выбрать</button>
+
+</article>
+
+<article class="card">
+
+<div class="symbol">◎</div>
+
+<h3>ChatGPT</h3>
+
+<p>ИИ от OpenAI</p>
+
+<div class="price">2 000 ₽</div>
+
+<div class="month">за 1 месяц</div>
+
+<button onclick="order('ChatGPT','2000')">Выбрать</button>
+
+</article>
+
+<article class="card">
+
+<div class="symbol">✦</div>
+
+<h3>Gemini</h3>
+
+<p>ИИ от Google</p>
+
+<div class="price">2 000 ₽</div>
+
+<div class="month">за 1 месяц</div>
+
+<button onclick="order('Gemini','2000')">Выбрать</button>
+
+</article>
+
+<article class="card">
+
+<div class="symbol">✺</div>
+
+<h3>Claude</h3>
+
+<p>ИИ от Anthropic</p>
+
+<div class="price">2 500 ₽</div>
+
+<div class="month">за 1 месяц</div>
+
+<button onclick="order('Claude','2500')">Выбрать</button>
+
+</article>
+
+</div>
+
+<section class="support">
+
+<h2>Нужна помощь?</h2>
+
+<p>Напиши нашей поддержке — поможем разобраться с заказом.</p>
+
+<button onclick="support()">Связаться с поддержкой ↗</button>
+
+</section>
+
+<footer>NEGSTORE © 2026 · AI SUBSCRIPTIONS</footer>
+
+</main>
+
+<script>
+
+const tg = window.Telegram?.WebApp;
+
+tg?.ready();
+
+tg?.expand();
+
+function order(name,price){
+
+ const message = 'Здравствуйте! Хочу заказать '+name+' на 1 месяц за '+price+' ₽.';
+
+ const url = 'https://t.me/NE_GP?text='+encodeURIComponent(message);
+
+ if(tg?.openTelegramLink){
+
+   tg.openTelegramLink(url);
+
+ }else{
+
+   window.open(url,'_blank');
+
+ }
+
+}
+
+function support(){
+
+ if(tg?.openTelegramLink){
+
+   tg.openTelegramLink('https://t.me/NE_GP');
+
+ }else{
+
+   window.open('https://t.me/NE_GP','_blank');
+
+ }
+
+}
+
+</script>
+
+</body>
+
+</html>
